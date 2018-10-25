@@ -10,7 +10,7 @@ import Foundation
 
 class Holiday {
     
-    let name: String = ""
-    let date: Date = Date()
+    var name: String = ""
+    var date: Date = Date()
     
 }

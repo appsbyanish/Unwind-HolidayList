@@ -13,6 +13,8 @@
 		12DBC4572182246500B2806F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12DBC4562182246500B2806F /* Assets.xcassets */; };
 		12DBC45A2182246500B2806F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DBC4582182246500B2806F /* LaunchScreen.storyboard */; };
 		12DBC46621822D2800B2806F /* Holiday.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DBC46521822D2800B2806F /* Holiday.swift */; };
+		12DBC468218234E400B2806F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 12DBC467218234E400B2806F /* GoogleService-Info.plist */; };
+		4EC80F63986734780EE63252 /* Pods_Unwind___Holiday_List.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0A3F8F93C0CCE42E5FA348 /* Pods_Unwind___Holiday_List.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,10 @@
 		12DBC4592182246500B2806F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12DBC45B2182246500B2806F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12DBC46521822D2800B2806F /* Holiday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Holiday.swift; sourceTree = "<group>"; };
+		12DBC467218234E400B2806F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		5E0A3F8F93C0CCE42E5FA348 /* Pods_Unwind___Holiday_List.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_Unwind___Holiday_List.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A3AC5FEDF6379C71A793C66 /* Pods-Unwind - Holiday List.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unwind - Holiday List.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Unwind - Holiday List/Pods-Unwind - Holiday List.debug.xcconfig"; sourceTree = "<group>"; };
+		B4F1E4D93578300225525313 /* Pods-Unwind - Holiday List.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unwind - Holiday List.release.xcconfig"; path = "Pods/Target Support Files/Pods-Unwind - Holiday List/Pods-Unwind - Holiday List.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EC80F63986734780EE63252 /* Pods_Unwind___Holiday_List.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				12DBC44E2182246400B2806F /* Unwind - Holiday List */,
 				12DBC44D2182246400B2806F /* Products */,
+				532D1548A8E3A69F1A481FDE /* Pods */,
+				3B01163E5475A5E8FF06B297 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +70,7 @@
 				12DBC46321822CE900B2806F /* View */,
 				12DBC4562182246500B2806F /* Assets.xcassets */,
 				12DBC45B2182246500B2806F /* Info.plist */,
+				12DBC467218234E400B2806F /* GoogleService-Info.plist */,
 			);
 			path = "Unwind - Holiday List";
 			sourceTree = "<group>";
@@ -91,6 +101,23 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		3B01163E5475A5E8FF06B297 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5E0A3F8F93C0CCE42E5FA348 /* Pods_Unwind___Holiday_List.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		532D1548A8E3A69F1A481FDE /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7A3AC5FEDF6379C71A793C66 /* Pods-Unwind - Holiday List.debug.xcconfig */,
+				B4F1E4D93578300225525313 /* Pods-Unwind - Holiday List.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -98,9 +125,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 12DBC45E2182246500B2806F /* Build configuration list for PBXNativeTarget "Unwind - Holiday List" */;
 			buildPhases = (
+				C8E756E98B89C713C5C92EC1 /* [CP] Check Pods Manifest.lock */,
 				12DBC4482182246400B2806F /* Sources */,
 				12DBC4492182246400B2806F /* Frameworks */,
 				12DBC44A2182246400B2806F /* Resources */,
+				4861D20E7ACC681DA4A8159C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -150,12 +179,68 @@
 			buildActionMask = 2147483647;
 			files = (
 				12DBC45A2182246500B2806F /* LaunchScreen.storyboard in Resources */,
+				12DBC468218234E400B2806F /* GoogleService-Info.plist in Resources */,
 				12DBC4572182246500B2806F /* Assets.xcassets in Resources */,
 				12DBC4552182246400B2806F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4861D20E7ACC681DA4A8159C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Unwind - Holiday List/Pods-Unwind - Holiday List-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Unwind - Holiday List/Pods-Unwind - Holiday List-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C8E756E98B89C713C5C92EC1 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Unwind - Holiday List-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		12DBC4482182246400B2806F /* Sources */ = {
@@ -308,11 +393,13 @@
 		};
 		12DBC45F2182246500B2806F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7A3AC5FEDF6379C71A793C66 /* Pods-Unwind - Holiday List.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KZB38V78PV;
 				INFOPLIST_FILE = "Unwind - Holiday List/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -326,11 +413,13 @@
 		};
 		12DBC4602182246500B2806F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B4F1E4D93578300225525313 /* Pods-Unwind - Holiday List.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KZB38V78PV;
 				INFOPLIST_FILE = "Unwind - Holiday List/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

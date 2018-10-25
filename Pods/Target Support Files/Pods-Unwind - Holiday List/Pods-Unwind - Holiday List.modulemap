@@ -1,0 +1,6 @@
+framework module Pods_Unwind___Holiday_List {
+  umbrella header "Pods-Unwind - Holiday List-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -8,6 +8,6 @@ target 'Unwind - Holiday List' do
     pod 'SwiftyJSON'
     pod 'SVProgressHUD'
     pod 'Alamofire'
-    pod 'Firebase/Core'
+    pod 'RealmSwift'
 
 end

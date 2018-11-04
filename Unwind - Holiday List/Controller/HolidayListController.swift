@@ -38,6 +38,7 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
         holidayListTableView.register(UINib(nibName: "HolidayTableViewCell", bundle: nil) , forCellReuseIdentifier: "HolidayTableViewCell")
         
         holidayListTableView.rowHeight = UITableView.automaticDimension
+        holidayListTableView.estimatedRowHeight = 120.0
         
         holidayListTableView.reloadData()
     }

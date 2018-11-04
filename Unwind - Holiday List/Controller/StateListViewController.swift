@@ -14,7 +14,7 @@ import Alamofire
 
 class StateListViewController: UITableViewController {
     
-    let holidayListJsonURL = "https://s3.ap-south-1.amazonaws.com/holiday-list/holiday-list.json"
+    let holidayListJsonURL = "https://s3.ap-south-1.amazonaws.com/holiday-list/holidays.json"
     
     let realm = try! Realm()
     
@@ -52,37 +52,38 @@ class StateListViewController: UITableViewController {
     }
     
     func parseHolidayJson(holidayListJson: JSON) {
-        
-        for (_, yearJson):(String, JSON) in holidayListJson["holidaylist"] {
             
-            for (_, stateJson):(String, JSON) in yearJson["state"] {
-                
-                let state = State()
-                
-                state.name = stateJson["state_name"].stringValue
-                
-                for (_, monthJson):(String, JSON) in stateJson["Month"] {
+        for (_, stateJson):(String, JSON) in holidayListJson["states"] {
+            
+            let state = State()
+            
+            state.name = stateJson["name"].stringValue
+            
+            for (_, holidayJson):(String, JSON) in stateJson["holidays"] {
                     
-                    
-                    for (_, holidayJson):(String, JSON) in monthJson["Data"] {
-                        
-                        let holiday = Holiday()
-                        holiday.name = holidayJson["holiday_name"].stringValue
-                        
-                        // TODO: set date
-                        state.holidays.append(holiday)
-                        
-                    }
-                }
-                do {
-                    try realm.write {
-                        realm.add(state)
-                    }
-                } catch {
-                    print("Error saving state: \(error)")
+                let holiday = Holiday()
+                holiday.name = holidayJson["name"].stringValue
+                
+                // TODO: set date
+                let dateFormatter = DateFormatter()
+                dateFormatter.timeZone = TimeZone.init(abbreviation: "IST")
+                dateFormatter.dateFormat = "dd/MM/yyyy"
+                
+                if let date = dateFormatter.date(from: holidayJson["date"].stringValue) {
+                    holiday.date = date
                 }
                 
+                
+                state.holidays.append(holiday)
             }
+            do {
+                try realm.write {
+                    realm.add(state)
+                }
+            } catch {
+                print("Error saving state: \(error)")
+            }
+                
         }
     }
 

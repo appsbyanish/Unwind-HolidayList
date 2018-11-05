@@ -73,7 +73,6 @@ class StateListViewController: UITableViewController {
                     holiday.date = date
                 }
                 
-                
                 state.holidays.append(holiday)
             }
             do {

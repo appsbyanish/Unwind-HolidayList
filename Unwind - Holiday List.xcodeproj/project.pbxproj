@@ -35,7 +35,7 @@
 		12DBC45B2182246500B2806F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		12DBC46521822D2800B2806F /* Holiday.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Holiday.swift; sourceTree = "<group>"; };
 		12DBC467218234E400B2806F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
-		5E0A3F8F93C0CCE42E5FA348 /* Pods_Unwind___Holiday_List.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = "Pods_Unwind___Holiday_List.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		5E0A3F8F93C0CCE42E5FA348 /* Pods_Unwind___Holiday_List.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Unwind___Holiday_List.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A3AC5FEDF6379C71A793C66 /* Pods-Unwind - Holiday List.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unwind - Holiday List.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Unwind - Holiday List/Pods-Unwind - Holiday List.debug.xcconfig"; sourceTree = "<group>"; };
 		B4F1E4D93578300225525313 /* Pods-Unwind - Holiday List.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Unwind - Holiday List.release.xcconfig"; path = "Pods/Target Support Files/Pods-Unwind - Holiday List/Pods-Unwind - Holiday List.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -219,6 +219,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Unwind - Holiday List/Pods-Unwind - Holiday List-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/ChameleonFramework/ChameleonFramework.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
@@ -229,6 +230,7 @@
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChameleonFramework.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",

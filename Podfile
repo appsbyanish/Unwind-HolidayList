@@ -9,5 +9,6 @@ target 'Unwind - Holiday List' do
     pod 'SVProgressHUD'
     pod 'Alamofire'
     pod 'RealmSwift'
+    pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
 
 end

@@ -71,6 +71,19 @@ class StateListViewController: UITableViewController {
                 
                 if let date = dateFormatter.date(from: holidayJson["date"].stringValue) {
                     holiday.date = date
+                    
+                    if state.holidays.count > 0 {
+                        if let previousHoliday = state.holidays.last {
+                            if holiday.date.timeIntervalSince(previousHoliday.date) <= Constants.TIME_INTERVAL_ONE_DAY {
+                                holiday.cellColorHexCode = previousHoliday.cellColorHexCode
+                            } else {
+                                holiday.cellColorHexCode = previousHoliday.cellColorHexCode == Constants.HOLIDAY_LIST_CELL_COLOR ? Constants.HOLIDAY_LIST_CELL_COLOR_ALTERNATE : Constants.HOLIDAY_LIST_CELL_COLOR
+                            }
+                        }
+                        
+                    } else {
+                        holiday.cellColorHexCode = Constants.HOLIDAY_LIST_CELL_COLOR
+                    }
                 }
                 
                 state.holidays.append(holiday)

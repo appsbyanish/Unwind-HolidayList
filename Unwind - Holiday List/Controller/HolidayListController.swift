@@ -15,7 +15,6 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var holidayListTableView: UITableView!
     
     let realm = try! Realm()
-    private let TIME_INTERVAL_ONE_DAY: Double = 86400
     
 //    private var holidaysToDisplay: List<Holiday> = List<Holiday>()
     
@@ -82,32 +81,30 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
             cell.holidayDate.text = "\(holiday.date.dayOfTheWeek()!)"
             cell.holidayName.text = holiday.name
             
-            var isNextHoliday = false
-            
+//            var isNextHoliday = false
+//
             if(indexPath.row > 0) {
-                
+
                 if let previousHoliday = selectedState?.holidays[indexPath.row - 1] {
                     let timeDifference = holiday.date.timeIntervalSince(previousHoliday.date)
-                    
+
                     if timeDifference == 0 {
                         cell.holidayDate.text = ""
                     }
-                    
-                    isNextHoliday = (timeDifference <= TIME_INTERVAL_ONE_DAY)
                 }
             }
+//
+//            if isNextHoliday {
+//                isAlternateCell = !isAlternateCell
+//            }
             
-            if isNextHoliday {
-                isAlternateCell = !isAlternateCell
-            }
-            
-            if isAlternateCell {
-                cell.backgroundColor = UIColor(hexString: FlatSand().hexValue())
-            } else {
-                cell.backgroundColor = UIColor(hexString: FlatSand().hexValue())?.darken(byPercentage: 0.1)
-            }
-            isAlternateCell = !isAlternateCell
-            
+//            if isAlternateCell {
+//                cell.backgroundColor = UIColor(hexString: FlatSand().hexValue())?.darken(byPercentage: 0.1) //#D5C59F
+//            } else {
+//                cell.backgroundColor = UIColor(hexString: FlatSand().hexValue()) //#EFDDB3
+//            }
+//            isAlternateCell = !isAlternateCell
+            cell.backgroundColor = UIColor(hexString: holiday.cellColorHexCode)
         }
 
         return cell

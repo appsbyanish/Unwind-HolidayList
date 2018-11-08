@@ -15,6 +15,4 @@ class Holiday: Object {
     @objc dynamic var date: Date = Date()
     @objc dynamic var cellColorHexCode: String = ""
     
-    var parentState = LinkingObjects(fromType: State.self, property: "holidays")
-    
 }

@@ -10,39 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--State List View Controller-->
-        <scene sceneID="RO0-UF-Q3r">
-            <objects>
-                <tableViewController id="4IM-eh-0J7" customClass="StateListViewController" customModule="Unwind___Holiday_List" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wYD-3U-3oj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="State" id="rd9-ao-sAT">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rd9-ao-sAT" id="V8j-uJ-bFb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="4IM-eh-0J7" id="mtQ-E4-ggY"/>
-                            <outlet property="delegate" destination="4IM-eh-0J7" id="bk6-g5-FmR"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="Lou-BK-L2u"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="goToHolidayList" id="fbQ-T3-uwg"/>
-                    </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Zx0-yG-w5Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="697" y="56"/>
-        </scene>
-        <!--Holiday List Controller-->
+        <!--Holidays-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="HolidayListController" customModule="Unwind___Holiday_List" customModuleProvider="target" sceneMemberID="viewController">
@@ -106,14 +74,14 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="hby-c2-sJu"/>
+                    <navigationItem key="navigationItem" title="Holidays" id="hby-c2-sJu"/>
                     <connections>
                         <outlet property="holidayListTableView" destination="Woe-Ku-S62" id="Bda-F3-4ky"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1418" y="57"/>
+            <point key="canvasLocation" x="769" y="63"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fnS-3l-XT0">
@@ -126,7 +94,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="4IM-eh-0J7" kind="relationship" relationship="rootViewController" id="tf1-D9-XPL"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="mec-dq-WmP"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jGH-do-rE2" userLabel="First Responder" sceneMemberID="firstResponder"/>

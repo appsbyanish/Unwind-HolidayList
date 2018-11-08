@@ -36,7 +36,7 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
         holidayListTableView.register(UINib(nibName: "HolidayTableViewCell", bundle: nil) , forCellReuseIdentifier: "HolidayTableViewCell")
         
         holidayListTableView.rowHeight = UITableView.automaticDimension
-        //holidayListTableView.estimatedRowHeight = 120.0
+        holidayListTableView.estimatedRowHeight = 100.0
         holidayListTableView.separatorStyle = .none
         
         loadHolidays()
@@ -73,16 +73,10 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
         
         let holidays = List<Holiday>()
         
-        //        for (_, stateJson):(String, JSON) in holidayListJson["states"] {
-        //
-        //            let state = State()
-        //
-        //            state.name = stateJson["name"].stringValue
-        
         for (_, holidayJson):(String, JSON) in holidayListJson["holidays"] {
             
             let holiday = Holiday()
-            holiday.name = holidayJson["name"].stringValue
+            holiday.name.append(holidayJson["name"].stringValue)
             
             // TODO: set date
             let dateFormatter = DateFormatter()
@@ -94,7 +88,17 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 if holidays.count > 0 {
                     if let previousHoliday = holidays.last {
-                        if holiday.date.timeIntervalSince(previousHoliday.date) <= Constants.TIME_INTERVAL_ONE_DAY {
+                        if holiday.date.timeIntervalSince(previousHoliday.date) == 0 {
+                            do {
+                                try realm.write {
+                                    previousHoliday.name.append(holidayJson["name"].stringValue)
+                                }
+                            } catch {
+                                print("Error updating holiday: \(error)")
+                            }
+                            continue
+                        
+                        } else if holiday.date.timeIntervalSince(previousHoliday.date) <= Constants.TIME_INTERVAL_ONE_DAY {
                             holiday.cellColorHexCode = previousHoliday.cellColorHexCode
                         } else {
                             holiday.cellColorHexCode = previousHoliday.cellColorHexCode == Constants.HOLIDAY_LIST_CELL_COLOR ? Constants.HOLIDAY_LIST_CELL_COLOR_ALTERNATE : Constants.HOLIDAY_LIST_CELL_COLOR
@@ -129,7 +133,13 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
         if let holiday = holidays?[indexPath.row] {
             
             cell.holidayDate.text = "\(holiday.date.dayOfTheWeek()!)"
-            cell.holidayName.text = holiday.name
+            
+            if holiday.name.count > 1 {
+                cell.holidayName.text = "\(holiday.name[0]) (\(holiday.name.count - 1) more)"
+            }
+            else {
+                cell.holidayName.text = holiday.name[0]
+            }
             
 //            var isNextHoliday = false
 //

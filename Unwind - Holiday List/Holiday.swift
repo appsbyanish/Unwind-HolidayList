@@ -11,8 +11,7 @@ import RealmSwift
 
 class Holiday: Object {
     
-    @objc dynamic var name: String = ""
+    let name: List<String> = List<String>()
     @objc dynamic var date: Date = Date()
     @objc dynamic var cellColorHexCode: String = ""
-    
 }

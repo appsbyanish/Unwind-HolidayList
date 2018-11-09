@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8B60917F9198E4E373596D059C889FEC"
+               BlueprintIdentifier = "6415C83174A976A66EA3C9FCCE132D31"
                BuildableName = "Pods_Unwind___Holiday_List.framework"
                BlueprintName = "Pods-Unwind - Holiday List"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8B60917F9198E4E373596D059C889FEC"
+            BlueprintIdentifier = "6415C83174A976A66EA3C9FCCE132D31"
             BuildableName = "Pods_Unwind___Holiday_List.framework"
             BlueprintName = "Pods-Unwind - Holiday List"
             ReferencedContainer = "container:Pods.xcodeproj">

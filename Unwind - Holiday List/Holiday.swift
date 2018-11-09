@@ -13,5 +13,6 @@ class Holiday: Object {
     
     let name: List<String> = List<String>()
     @objc dynamic var date: Date = Date()
-    @objc dynamic var cellColorHexCode: String = ""
+    @objc dynamic var cellColorIndex: Int = 0
+    //@objc dynamic var isHidden = false
 }

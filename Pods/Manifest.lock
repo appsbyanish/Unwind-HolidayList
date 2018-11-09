@@ -10,6 +10,7 @@ PODS:
     - Realm (= 3.11.1)
   - SVProgressHUD (2.2.5)
   - SwiftyJSON (4.2.0)
+  - SwipeCellKit (2.5.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -17,6 +18,7 @@ DEPENDENCIES:
   - RealmSwift
   - SVProgressHUD
   - SwiftyJSON
+  - SwipeCellKit
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -25,6 +27,7 @@ SPEC REPOS:
     - RealmSwift
     - SVProgressHUD
     - SwiftyJSON
+    - SwipeCellKit
 
 EXTERNAL SOURCES:
   ChameleonFramework:
@@ -42,7 +45,8 @@ SPEC CHECKSUMS:
   RealmSwift: c9580133e73ef40ed340401af2dbc9a5790dfea7
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftyJSON: c4bcba26dd9ec7a027fc8eade48e2c911f229e96
+  SwipeCellKit: d8f2617538ce3021cb0a11d1b93856a06a2f2e20
 
-PODFILE CHECKSUM: b43dbaa8cccef5ea20d3cc418a442c56eb2a0cd3
+PODFILE CHECKSUM: 9a41e22c233867cfc2b14a194ab33909282e1869
 
 COCOAPODS: 1.5.3

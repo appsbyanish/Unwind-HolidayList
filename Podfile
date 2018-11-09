@@ -10,5 +10,6 @@ target 'Unwind - Holiday List' do
     pod 'Alamofire'
     pod 'RealmSwift'
     pod 'ChameleonFramework/Swift', :git => 'https://github.com/ViccAlexander/Chameleon.git'
+    pod 'SwipeCellKit'
 
 end

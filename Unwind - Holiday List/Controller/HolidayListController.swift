@@ -18,6 +18,7 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var holidayListTableView: UITableView!
     
     let holidayListJsonURL = "https://s3.ap-south-1.amazonaws.com/holiday-list/holidays.json"
+    //let holidayListJsonURL = "/Users/anishgopalvenugopal/my lair/apps/Unwind - Holiday List/Unwind - Holiday List/holidays.json"
     
     let realm = try! Realm()
     
@@ -49,6 +50,23 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
         
         if(holidays?.count == 0) {
             SVProgressHUD.show()
+            /*
+            if let path = Bundle.main.path(forResource: "holidays.json", ofType: "json") {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                    
+                    self.parseHolidayJson(holidayListJson: JSON(data))
+                    
+                    self.holidays = self.realm.objects(Holiday.self)
+                    
+                    self.holidayListTableView.reloadData()
+                    
+                } catch {
+                    print("Error reading json file from disc: \(error)")
+                }
+            }
+            SVProgressHUD.dismiss()
+            */
             
             Alamofire.request(holidayListJsonURL, method: .get).responseJSON {
                 response in
@@ -66,6 +84,7 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 SVProgressHUD.dismiss()
             }
+            
         }
     }
     
@@ -99,14 +118,14 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
                             continue
                         
                         } else if holiday.date.timeIntervalSince(previousHoliday.date) <= Constants.TIME_INTERVAL_ONE_DAY {
-                            holiday.cellColorHexCode = previousHoliday.cellColorHexCode
+                            holiday.cellColorIndex = previousHoliday.cellColorIndex
                         } else {
-                            holiday.cellColorHexCode = previousHoliday.cellColorHexCode == Constants.HOLIDAY_LIST_CELL_COLOR ? Constants.HOLIDAY_LIST_CELL_COLOR_ALTERNATE : Constants.HOLIDAY_LIST_CELL_COLOR
+                            holiday.cellColorIndex = previousHoliday.cellColorIndex == 0 ? 1 : 0
                         }
                     }
                     
                 } else {
-                    holiday.cellColorHexCode = Constants.HOLIDAY_LIST_CELL_COLOR
+                    holiday.cellColorIndex = 0
                 }
             }
             
@@ -164,7 +183,7 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
 //                cell.backgroundColor = UIColor(hexString: FlatSand().hexValue()) //#EFDDB3
 //            }
 //            isAlternateCell = !isAlternateCell
-            cell.backgroundColor = UIColor(hexString: holiday.cellColorHexCode)
+            cell.backgroundColor = UIColor(hexString: Constants.HOLIDAY_LIST_CELL_COLOR[holiday.cellColorIndex])
         }
 
         return cell

@@ -35,28 +35,41 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
     
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
         
-        guard orientation == .right else { return nil }
-        
-        let hideAction = SwipeAction(style: .destructive, title: "Hide") { action, indexPath in
-            self.hideAction(at: indexPath, to: true)
+        if orientation == .right {
+            let hideAction = SwipeAction(style: .default, title: "Hide") { action, indexPath in
+                self.hideAction(at: indexPath, to: true)
+            }
+            
+            // customize the action appearance
+            //deleteAction.image = UIImage(named: "delete-icon")
+            
+            return [hideAction]
+        } else {
+            let unhideAction = SwipeAction(style: .default, title: "Unhide") { action, indexPath in
+                self.unhideAction(at: indexPath, to: false)
+            }
+            
+            // customize the action appearance
+            //deleteAction.image = UIImage(named: "delete-icon")
+            
+            return [unhideAction]
         }
         
-        // customize the action appearance
-        //deleteAction.image = UIImage(named: "delete-icon")
         
-        return [hideAction]
     }
     
-    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
-        var options = SwipeTableOptions()
-        options.expansionStyle = .destructive
-        return options
-    }
+//    func tableView(_ tableView: UITableView, editActionsOptionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> SwipeTableOptions {
+//        var options = SwipeTableOptions()
+//        options.expansionStyle = .default
+//        return options
+//    }
     
     func hideAction(at indexPath: IndexPath, to hide: Bool) {
-        // Update our data model.
         
-        print("Item deleted from superclass")
+    }
+    
+    func unhideAction(at indexPath: IndexPath, to hide: Bool) {
+        
     }
     
 }

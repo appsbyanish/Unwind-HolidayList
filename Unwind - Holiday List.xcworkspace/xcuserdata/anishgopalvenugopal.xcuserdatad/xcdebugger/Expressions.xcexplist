@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "HolidayListController.refreshHolidayList():HolidayListController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "holidayListToDisplay.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HolidayListController.setColorIndex(of:asper:):HolidayListController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "previousHoliday!.name[0]">
+            </PersistentString>
+            <PersistentString
+               value = "holiday.cellColorIndex">
+            </PersistentString>
+            <PersistentString
+               value = "previousHoliday!.cellColorIndex">
+            </PersistentString>
+            <PersistentString
+               value = "previousHoliday!.date">
+            </PersistentString>
+            <PersistentString
+               value = "holiday.date">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HolidayListController.tableView(_:cellForRowAt:):HolidayListController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "previousCell.backgroundColor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

@@ -15,10 +15,9 @@ import Alamofire
 
 class HolidayListController: SwipeTableViewController {
     
-    //@IBOutlet weak var holidayListTableView: UITableView!
-    
     let holidayListJsonURL = "https://s3.ap-south-1.amazonaws.com/holiday-list/holidays.json"
-    //let holidayListJsonURL = "/Users/anishgopalvenugopal/my lair/apps/Unwind - Holiday List/Unwind - Holiday List/holidays.json"
+    
+    @IBOutlet weak var showHiddenHolidays: UISwitch!
     
     let realm = try! Realm()
     
@@ -30,12 +29,7 @@ class HolidayListController: SwipeTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //holidayListTableView.delegate = self
-        //holidayListTableView.dataSource = self
-        
-        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Holiday")
-        
-        tableView.register(UINib(nibName: "HolidayTableViewCell", bundle: nil) , forCellReuseIdentifier: "HolidayTableViewCell")
+        tableView.register(UINib(nibName: "HolidayTableViewCell", bundle: nil), forCellReuseIdentifier: "HolidayTableViewCell")
         
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100.0
@@ -77,6 +71,64 @@ class HolidayListController: SwipeTableViewController {
         }
     }
     
+    func refreshHolidayList() {
+        if holidays != nil {
+            holidayListToDisplay.removeAll()
+            var index = 0
+            var mostRecentNonHiddenHolidayIndex = -1
+            
+            for holiday in holidays! {
+                if holiday.isHidden {
+                    do {
+                        try realm.write {
+                            holiday.cellColorIndex = 2
+                        }
+                    } catch {
+                        print("Error updating holiday: \(error)")
+                    }
+                    
+                    if showHiddenHolidays.isOn {
+                        holidayListToDisplay.append(holiday)
+                    }
+                    
+                } else {
+                    do {
+                        try realm.write {
+                            if mostRecentNonHiddenHolidayIndex != -1 {
+                                let previousHoliday = holidays![mostRecentNonHiddenHolidayIndex]
+                                setColorIndex(of: holiday, asper: previousHoliday)
+                                
+                            } else {
+                                setColorIndex(of: holiday)
+                            }
+                        }
+                    } catch {
+                        print("Error updating holiday: \(error)")
+                    }
+                    
+                    mostRecentNonHiddenHolidayIndex = index
+                    holidayListToDisplay.append(holiday)
+                }
+                
+                index += 1
+            }
+        }
+    }
+    
+    func setColorIndex(of holiday: Holiday, asper previousHoliday: Holiday? = nil) {
+        if previousHoliday != nil {
+            //let previousHoliday = holidays![index - 1]
+            
+            if holiday.date.timeIntervalSince(previousHoliday!.date) <= Constants.TIME_INTERVAL_ONE_DAY {
+                holiday.cellColorIndex = previousHoliday!.cellColorIndex
+            } else {
+                holiday.cellColorIndex = previousHoliday!.cellColorIndex == 0 ? 1 : 0
+            }
+        } else {
+            holiday.cellColorIndex = 0
+        }
+    }
+    
     func parseHolidayJson(holidayListJson: JSON) {
         
         for (_, holidayJson):(String, JSON) in holidayListJson["holidays"] {
@@ -104,15 +156,13 @@ class HolidayListController: SwipeTableViewController {
                             }
                             continue
                         
-                        } else if holiday.date.timeIntervalSince(previousHoliday.date) <= Constants.TIME_INTERVAL_ONE_DAY {
-                            holiday.cellColorIndex = previousHoliday.cellColorIndex
                         } else {
-                            holiday.cellColorIndex = previousHoliday.cellColorIndex == 0 ? 1 : 0
+                            setColorIndex(of: holiday, asper: previousHoliday)
                         }
                     }
                     
                 } else {
-                    holiday.cellColorIndex = 0
+                    setColorIndex(of: holiday)
                 }
             }
             
@@ -128,9 +178,8 @@ class HolidayListController: SwipeTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        print(holidayListToDisplay.count)
         return holidayListToDisplay.count
-    
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> HolidayTableViewCell {
@@ -156,35 +205,46 @@ class HolidayListController: SwipeTableViewController {
             cell.holidayName.textColor = UIColor.black
         }
         
-        if(indexPath.row > 0) {
-
-            if let previousHoliday = holidays?[indexPath.row - 1] {
-                let timeDifference = holiday.date.timeIntervalSince(previousHoliday.date)
-
-                if timeDifference == 0 {
-                    cell.holidayDate.text = ""
-                }
-            }
-        }
+//        if indexPath.row > 0 {
+//            let previousHoliday = holidayListToDisplay[indexPath.row - 1]
+//
+//            //let previousCell = super.tableView(tableView, cellForRowAt: IndexPath(row: indexPath.row - 1, section: 0))
+////            let timeDifference = holiday.date.timeIntervalSince(previousHoliday.date)
+////
+////            if timeDifference == 0 {
+////                cell.holidayDate.text = ""
+////            }
+//            if holiday.date.timeIntervalSince(previousHoliday.date) <= Constants.TIME_INTERVAL_ONE_DAY {
+//                //cell.backgroundColor = previousCell.backgroundColor
+//                holiday.cellColorIndex = previousHoliday.cellColorIndex
+//            } else {
+//                //cell.backgroundColor = (previousCell.backgroundColor == UIColor(hexString: Constants.HOLIDAY_LIST_CELL_COLOR[0]) ? UIColor(hexString: Constants.HOLIDAY_LIST_CELL_COLOR[1]) : UIColor(hexString: Constants.HOLIDAY_LIST_CELL_COLOR[0]))
+//                holiday.cellColorIndex = previousHoliday.cellColorIndex == 0 ? 1 : 0
+//            }
+//
+//        }
+//        else {
+//            cell.backgroundColor = UIColor(hexString: Constants.HOLIDAY_LIST_CELL_COLOR[0])
+//        }
 
         cell.backgroundColor = UIColor(hexString: Constants.HOLIDAY_LIST_CELL_COLOR[holiday.cellColorIndex])
         
-
         return cell
     }
     
     override func hideAction(at indexPath: IndexPath, to hide: Bool) {
-        if let holiday = holidays?[indexPath.row] {
+        let holiday = holidayListToDisplay[indexPath.row]
+        if holiday.isHidden != hide {
             do {
                 try realm.write {
                     holiday.isHidden = hide
-                    //tableView.deleteRows(at: [index], with: .fade)
                 }
-                holidayListToDisplay.remove(at: indexPath.row)
-                //tableView.deleteRows(at: [index], with: .left)
             } catch {
                 print("Error saving holiday: \(error)")
             }
+            //holidayListToDisplay.remove(at: indexPath.row)
+            refreshHolidayList()
+            tableView.reloadData()
         }
     }
     

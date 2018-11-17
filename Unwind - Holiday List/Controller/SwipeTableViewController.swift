@@ -37,7 +37,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         
         if orientation == .right {
             let hideAction = SwipeAction(style: .default, title: "Hide") { action, indexPath in
-                self.hideAction(at: indexPath, to: true)
+                self.toggleHideAction(at: indexPath, to: true)
             }
             
             // customize the action appearance
@@ -46,7 +46,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             return [hideAction]
         } else {
             let unhideAction = SwipeAction(style: .default, title: "Unhide") { action, indexPath in
-                self.unhideAction(at: indexPath, to: false)
+                self.toggleHideAction(at: indexPath, to: false)
             }
             
             // customize the action appearance
@@ -64,13 +64,8 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
 //        return options
 //    }
     
-    func hideAction(at indexPath: IndexPath, to hide: Bool) {
+    func toggleHideAction(at indexPath: IndexPath, to hide: Bool) {
         
     }
-    
-    func unhideAction(at indexPath: IndexPath, to hide: Bool) {
-        
-    }
-    
 }
 

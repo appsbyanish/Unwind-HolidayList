@@ -232,7 +232,7 @@ class HolidayListController: SwipeTableViewController {
         return cell
     }
     
-    override func hideAction(at indexPath: IndexPath, to hide: Bool) {
+    override func toggleHideAction(at indexPath: IndexPath, to hide: Bool) {
         let holiday = holidayListToDisplay[indexPath.row]
         if holiday.isHidden != hide {
             do {

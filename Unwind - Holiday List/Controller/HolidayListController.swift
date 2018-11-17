@@ -35,6 +35,8 @@ class HolidayListController: SwipeTableViewController {
         tableView.estimatedRowHeight = 100.0
         tableView.separatorStyle = .none
         
+        showHiddenHolidays.isOn = UserDefaults.standard.bool(forKey: "showHiddenHolidays")
+        
         loadHolidays()
         
         tableView.reloadData()
@@ -64,7 +66,7 @@ class HolidayListController: SwipeTableViewController {
             }
         } else {
             for holiday in holidays! {
-                if !holiday.isHidden {
+                if !holiday.isHidden || showHiddenHolidays.isOn {
                     holidayListToDisplay.append(holiday)
                 }
             }
@@ -178,7 +180,6 @@ class HolidayListController: SwipeTableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(holidayListToDisplay.count)
         return holidayListToDisplay.count
     }
     
@@ -269,6 +270,8 @@ class HolidayListController: SwipeTableViewController {
         }
         
         tableView.reloadData()
+        
+        UserDefaults.standard.set(sender.isOn, forKey: "showHiddenHolidays")
     }
 }
 

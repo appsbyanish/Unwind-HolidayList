@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import SwipeCellKit
 
-class HolidayTableViewCell: UITableViewCell {
+class HolidayTableViewCell: SwipeTableViewCell {
 
     @IBOutlet weak var holidayDate: UILabel!
     @IBOutlet weak var holidayName: UILabel!

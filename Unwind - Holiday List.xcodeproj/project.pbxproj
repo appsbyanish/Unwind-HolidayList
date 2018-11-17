@@ -11,7 +11,7 @@
 		1256F6AD218F304300675C4C /* HolidayTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1256F6AB218F304300675C4C /* HolidayTableViewCell.xib */; };
 		1256F6B12190C8C900675C4C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1256F6B02190C8C900675C4C /* Constants.swift */; };
 		1256F6B32195461700675C4C /* holidays.json in Resources */ = {isa = PBXBuildFile; fileRef = 1256F6B22195461700675C4C /* holidays.json */; };
-		1256F6B52195C20700675C4C /* SwipeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1256F6B42195C20700675C4C /* SwipeTableViewCell.swift */; };
+		1256F6B52195C20700675C4C /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1256F6B42195C20700675C4C /* SwipeTableViewController.swift */; };
 		12DBC4502182246400B2806F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DBC44F2182246400B2806F /* AppDelegate.swift */; };
 		12DBC4522182246400B2806F /* HolidayListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12DBC4512182246400B2806F /* HolidayListController.swift */; };
 		12DBC4552182246400B2806F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12DBC4532182246400B2806F /* Main.storyboard */; };
@@ -27,7 +27,7 @@
 		1256F6AB218F304300675C4C /* HolidayTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HolidayTableViewCell.xib; sourceTree = "<group>"; };
 		1256F6B02190C8C900675C4C /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		1256F6B22195461700675C4C /* holidays.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = holidays.json; sourceTree = "<group>"; };
-		1256F6B42195C20700675C4C /* SwipeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewCell.swift; sourceTree = "<group>"; };
+		1256F6B42195C20700675C4C /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		12DBC44C2182246400B2806F /* Unwind - Holiday List.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Unwind - Holiday List.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		12DBC44F2182246400B2806F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		12DBC4512182246400B2806F /* HolidayListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HolidayListController.swift; sourceTree = "<group>"; };
@@ -100,7 +100,7 @@
 			children = (
 				12DBC44F2182246400B2806F /* AppDelegate.swift */,
 				12DBC4512182246400B2806F /* HolidayListController.swift */,
-				1256F6B42195C20700675C4C /* SwipeTableViewCell.swift */,
+				1256F6B42195C20700675C4C /* SwipeTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -280,7 +280,7 @@
 				12DBC46621822D2800B2806F /* Holiday.swift in Sources */,
 				12DBC4522182246400B2806F /* HolidayListController.swift in Sources */,
 				1256F6B12190C8C900675C4C /* Constants.swift in Sources */,
-				1256F6B52195C20700675C4C /* SwipeTableViewCell.swift in Sources */,
+				1256F6B52195C20700675C4C /* SwipeTableViewController.swift in Sources */,
 				12DBC4502182246400B2806F /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

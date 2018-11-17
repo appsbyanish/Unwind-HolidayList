@@ -13,36 +13,37 @@ import SwiftyJSON
 import SVProgressHUD
 import Alamofire
 
-class HolidayListController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HolidayListController: SwipeTableViewController {
     
-    @IBOutlet weak var holidayListTableView: UITableView!
+    //@IBOutlet weak var holidayListTableView: UITableView!
     
     let holidayListJsonURL = "https://s3.ap-south-1.amazonaws.com/holiday-list/holidays.json"
     //let holidayListJsonURL = "/Users/anishgopalvenugopal/my lair/apps/Unwind - Holiday List/Unwind - Holiday List/holidays.json"
     
     let realm = try! Realm()
     
-    var holidays: Results<Holiday>?
+    var holidays: Results<Holiday>? //persistent data
+    var holidayListToDisplay: List<Holiday> = List<Holiday>()
     
     private var isAlternateCell = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        holidayListTableView.delegate = self
-        holidayListTableView.dataSource = self
+        //holidayListTableView.delegate = self
+        //holidayListTableView.dataSource = self
         
-        holidayListTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Holiday")
+        //tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Holiday")
         
-        holidayListTableView.register(UINib(nibName: "HolidayTableViewCell", bundle: nil) , forCellReuseIdentifier: "HolidayTableViewCell")
+        tableView.register(UINib(nibName: "HolidayTableViewCell", bundle: nil) , forCellReuseIdentifier: "HolidayTableViewCell")
         
-        holidayListTableView.rowHeight = UITableView.automaticDimension
-        holidayListTableView.estimatedRowHeight = 100.0
-        holidayListTableView.separatorStyle = .none
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 100.0
+        tableView.separatorStyle = .none
         
         loadHolidays()
         
-        holidayListTableView.reloadData()
+        tableView.reloadData()
     }
     
     func loadHolidays() {
@@ -50,23 +51,6 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
         
         if(holidays?.count == 0) {
             SVProgressHUD.show()
-            /*
-            if let path = Bundle.main.path(forResource: "holidays.json", ofType: "json") {
-                do {
-                    let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                    
-                    self.parseHolidayJson(holidayListJson: JSON(data))
-                    
-                    self.holidays = self.realm.objects(Holiday.self)
-                    
-                    self.holidayListTableView.reloadData()
-                    
-                } catch {
-                    print("Error reading json file from disc: \(error)")
-                }
-            }
-            SVProgressHUD.dismiss()
-            */
             
             Alamofire.request(holidayListJsonURL, method: .get).responseJSON {
                 response in
@@ -76,7 +60,7 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
                     
                     self.holidays = self.realm.objects(Holiday.self)
                     
-                    self.holidayListTableView.reloadData()
+                    self.tableView.reloadData()
                 }
                 else {
                     print("Error parsing JSON: \(String(describing: response.result.error))")
@@ -84,13 +68,16 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
                 
                 SVProgressHUD.dismiss()
             }
-            
+        } else {
+            for holiday in holidays! {
+                if !holiday.isHidden {
+                    holidayListToDisplay.append(holiday)
+                }
+            }
         }
     }
     
     func parseHolidayJson(holidayListJson: JSON) {
-        
-        let holidays = List<Holiday>()
         
         for (_, holidayJson):(String, JSON) in holidayListJson["holidays"] {
             
@@ -105,8 +92,8 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
             if let date = dateFormatter.date(from: holidayJson["date"].stringValue) {
                 holiday.date = date
                 
-                if holidays.count > 0 {
-                    if let previousHoliday = holidays.last {
+                if holidayListToDisplay.count > 0 {
+                    if let previousHoliday = holidayListToDisplay.last {
                         if holiday.date.timeIntervalSince(previousHoliday.date) == 0 {
                             do {
                                 try realm.write {
@@ -132,7 +119,7 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
             do {
                 try realm.write {
                     realm.add(holiday)
-                    holidays.append(holiday)
+                    holidayListToDisplay.append(holiday)
                 }
             } catch {
                 print("Error saving holiday: \(error)")
@@ -140,53 +127,88 @@ class HolidayListController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return holidays?.count ?? 1
+        return holidayListToDisplay.count
     
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = holidayListTableView.dequeueReusableCell(withIdentifier: "HolidayTableViewCell", for: indexPath) as! HolidayTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> HolidayTableViewCell {
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
+            //tableView.dequeueReusableCell(withIdentifier: "HolidayTableViewCell", for: indexPath) as! HolidayTableViewCell
 
-        if let holiday = holidays?[indexPath.row] {
+        let holiday = holidayListToDisplay[indexPath.row]
             
-            cell.holidayDate.text = "\(holiday.date.dayOfTheWeek()!)"
-            
-            if holiday.name.count > 1 {
-                cell.holidayName.text = "\(holiday.name[0]) (\(holiday.name.count - 1) more)"
-            }
-            else {
-                cell.holidayName.text = holiday.name[0]
-            }
-            
-//            var isNextHoliday = false
-//
-            if(indexPath.row > 0) {
+        cell.holidayDate.text = "\(holiday.date.dayOfTheWeek()!)"
+        
+        if holiday.name.count > 1 {
+            cell.holidayName.text = "\(holiday.name[0]) (\(holiday.name.count - 1) more)"
+        }
+        else {
+            cell.holidayName.text = holiday.name[0]
+        }
+        
+        if holiday.isHidden {
+            cell.holidayDate.textColor = Constants.HOLIDAY_LIST_HIDDEN_COLOR
+            cell.holidayName.textColor = Constants.HOLIDAY_LIST_HIDDEN_COLOR
+        } else {
+            cell.holidayDate.textColor = UIColor.black
+            cell.holidayName.textColor = UIColor.black
+        }
+        
+        if(indexPath.row > 0) {
 
-                if let previousHoliday = holidays?[indexPath.row - 1] {
-                    let timeDifference = holiday.date.timeIntervalSince(previousHoliday.date)
+            if let previousHoliday = holidays?[indexPath.row - 1] {
+                let timeDifference = holiday.date.timeIntervalSince(previousHoliday.date)
 
-                    if timeDifference == 0 {
-                        cell.holidayDate.text = ""
-                    }
+                if timeDifference == 0 {
+                    cell.holidayDate.text = ""
                 }
             }
-//
-//            if isNextHoliday {
-//                isAlternateCell = !isAlternateCell
-//            }
-            
-//            if isAlternateCell {
-//                cell.backgroundColor = UIColor(hexString: FlatSand().hexValue())?.darken(byPercentage: 0.1) //#D5C59F
-//            } else {
-//                cell.backgroundColor = UIColor(hexString: FlatSand().hexValue()) //#EFDDB3
-//            }
-//            isAlternateCell = !isAlternateCell
-            cell.backgroundColor = UIColor(hexString: Constants.HOLIDAY_LIST_CELL_COLOR[holiday.cellColorIndex])
         }
 
+        cell.backgroundColor = UIColor(hexString: Constants.HOLIDAY_LIST_CELL_COLOR[holiday.cellColorIndex])
+        
+
         return cell
+    }
+    
+    override func hideAction(at indexPath: IndexPath, to hide: Bool) {
+        if let holiday = holidays?[indexPath.row] {
+            do {
+                try realm.write {
+                    holiday.isHidden = hide
+                    //tableView.deleteRows(at: [index], with: .fade)
+                }
+                holidayListToDisplay.remove(at: indexPath.row)
+                //tableView.deleteRows(at: [index], with: .left)
+            } catch {
+                print("Error saving holiday: \(error)")
+            }
+        }
+    }
+    
+    @IBAction func toggleClicked(_ sender: UISwitch) {
+        var index = 0
+        
+        if sender.isOn {
+            for holiday in holidays! {
+                if holiday.isHidden {
+                    holidayListToDisplay.insert(holiday, at: index)
+                }
+                index += 1
+            }
+        } else {
+            for holiday in holidays! {
+                if holiday.isHidden {
+                    holidayListToDisplay.remove(at: index)
+                } else {
+                    index += 1
+                }
+            }
+        }
+        
+        tableView.reloadData()
     }
 }
 
